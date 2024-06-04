@@ -17,35 +17,33 @@ Tauler::Tauler()
 
 int Tauler::comprovarFiles()
 {
-    int filesEliminades = 0;
-    int contador = 1;
-
-    int i = 0, j = 0;
-
-    while (i < MAX_FILA)
+    for (int i = 0; i < MAX_COL; i++)
     {
-        j = 0;
-        while (j < MAX_COL)
-        {
-            if (m_tauler[i][j] == 0)
-            {
-                j = 0;
-                if (i < MAX_FILA - 1)
-                {
-                    i++;
-                }
-                else
-                    return filesEliminades;
-            }
-            j++;
-        }
+        if (m_tauler[0][i] != 0)
+            return -1;
+    }
 
-        if (j == MAX_COL)
+    int filesEliminades = 0;
+    int contador = 0;
+
+    for (int i = 0; i < MAX_FILA; i++)
+    {
+        contador = 0;
+        for (int j = 0; j < MAX_COL; j++)
         {
-            //cout << endl << endl << "DETECTO FILA" << endl << endl;
-            eliminaFila(i);
-            filesEliminades++;
+            if (m_tauler[i][j] != 0)
+            {
+                contador++;
+            }
+
+            if (contador == MAX_COL)
+            {
+                filesEliminades++;
+                eliminaFila(i);
+            }
+
         }
+        contador = 0;
     }
     return filesEliminades;
 
@@ -54,7 +52,7 @@ int Tauler::comprovarFiles()
 void Tauler::eliminaFila(int index)
 {
 
-    for (int i = index; i > 1; i--)
+    for (int i = index; i > 0; i--)
     {
         for (int j = 0; j < MAX_COL; j++)
         {
