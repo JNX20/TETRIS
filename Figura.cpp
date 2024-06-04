@@ -18,11 +18,15 @@ Figura::Figura()
     m_tipus = NO_FIGURA;
     m_color = NO_COLOR;
     m_gir = GIR_HORARI;
+    m_imatge = GRAFIC_QUADRAT_GROC;
+    m_bloquejat = false;
+        
 }
 
 Figura::~Figura()
 {
 }
+
 
 void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& columna)
 {
@@ -43,6 +47,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
             }
         }
         m_tipus = NO_FIGURA;
+        m_imatge = GRAFIC_QUADRAT_GROC;
         break;
     }
     case FIGURA_O:
@@ -64,6 +69,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
             }
         }
         m_tipus = FIGURA_O;
+        m_imatge = GRAFIC_QUADRAT_GROC;
         break;
     }
 
@@ -82,6 +88,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
             m_forma[1][i] = m_color;
         }
         m_tipus = FIGURA_I;
+        m_imatge = GRAFIC_QUADRAT_BLAUCEL;
         break;
     }
     case FIGURA_T:
@@ -100,6 +107,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
         m_forma[1][2] = m_color;
 
         m_tipus = FIGURA_T;
+        m_imatge = GRAFIC_QUADRAT_MAGENTA;
         break;
     }
     case FIGURA_L:
@@ -118,6 +126,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
         m_forma[1][2] = m_color;
 
         m_tipus = FIGURA_L;
+        m_imatge = GRAFIC_QUADRAT_TARONJA;
         break;
     }
     case FIGURA_J:
@@ -136,6 +145,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
         m_forma[1][2] = m_color;
 
         m_tipus = FIGURA_J;
+        m_imatge = GRAFIC_QUADRAT_BLAUFOSC;
         break;
     }
     case FIGURA_S:
@@ -154,6 +164,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
         m_forma[0][2] = m_color;
 
         m_tipus = FIGURA_S;
+        m_imatge = GRAFIC_QUADRAT_VERD;
         break;
     }
 
@@ -173,6 +184,7 @@ void Figura::setFigura(const TipusFigura& forma, const int& fila, const int& col
         m_forma[1][2] = m_color;
 
         m_tipus = FIGURA_Z;
+        m_imatge = GRAFIC_QUADRAT_VERMELL;
         break;
     }
 
@@ -301,4 +313,33 @@ void Figura::girarFigura(DireccioGir gir)
             }
         }
     }
+}
+
+bool Figura::operator!=(Figura figura)
+{
+    if (figura.getGir() != getGir())
+        return true;
+    if (figura.getFila() != getFila())
+        return true;
+    if (figura.getColumna() != getColumna())
+        return true;
+    if (figura.getColor() != getColor())
+        return true;
+    if (figura.getTipus() != getTipus())
+        return true;
+    if (figura.getBloqueig() != getBloqueig())
+        return true;
+    if (figura.getImatge() != getImatge())
+        return true;
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (figura.getForma(i, j) != getForma(i, j))
+                return false;
+        }
+    }
+
+    return true;
 }
