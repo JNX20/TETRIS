@@ -1,8 +1,10 @@
 #ifndef FIGURA_H
 #define FIGURA_H
+#include "InfoJoc.h"
+#include "GraphicManager.h"
 
 
-typedef enum
+/*typedef enum
 {
     COLOR_NEGRE = 0,
     COLOR_GROC,
@@ -26,7 +28,7 @@ typedef enum
     FIGURA_J,
     FIGURA_Z,
     FIGURA_S,
-} TipusFigura;
+} TipusFigura;*/
 
 const int MAX_ALCADA = 4;
 const int MAX_AMPLADA = 4;
@@ -49,6 +51,7 @@ public:
     ColorFigura getColor() const { return m_color; }
     TipusFigura getTipus() const { return m_tipus; }
     bool getBloqueig() const { return m_bloquejat; }
+    IMAGE_NAME getImatge() { return m_imatge;  }
 
     void setFigura(const TipusFigura& forma, const int& fila, const int& columna);
     void setColor(const ColorFigura& color) { m_color = color; }
@@ -58,11 +61,14 @@ public:
     void setTipus(const TipusFigura& tipus) { m_tipus = tipus; }
     void setForma(const int& fila, const int& columna, const int& valorCasella) { m_forma[fila][columna] = valorCasella; }
     void setBloqueig(const bool& bloqueig) { m_bloquejat = bloqueig; }
+    void setImatge(IMAGE_NAME imatge) { m_imatge = imatge; }
 
 
     void girarFigura(DireccioGir gir);
     void desplacarLateral(int sentit);
     void baixar();
+
+    bool operator!=(Figura figura);
 
 
 private:
@@ -76,8 +82,8 @@ private:
     ColorFigura m_color;
     DireccioGir m_gir;
     bool m_bloquejat;
+    IMAGE_NAME m_imatge;
 };
 
 
 #endif
-
